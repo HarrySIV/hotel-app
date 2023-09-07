@@ -7,6 +7,11 @@ import { Reservation } from '../model/reservation';
 export class ReservationService {
   private reservations: Reservation[] = [];
 
+  constructor() {
+    let savedReservations = localStorage.getItem('reservations');
+    this.reservations = savedReservations ? JSON.parse(savedReservations) : [];
+  }
+
   //CRUD
   getReservations(): Reservation[] {
     return this.reservations;

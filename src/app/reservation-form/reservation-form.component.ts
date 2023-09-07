@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ReservationService } from '../resrvation/reservation.service';
 import { Reservation } from '../model/reservation';
@@ -14,7 +15,8 @@ export class ReservationFormComponent implements OnInit {
 
   constructor(
     private FormBuilder: FormBuilder,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,8 @@ export class ReservationFormComponent implements OnInit {
     if (this.reservationForm.valid) {
       let reservation: Reservation = this.reservationForm.value;
       this.reservationService.addReservation(reservation);
+
+      this.router.navigate(['/list']);
     }
   }
 }
